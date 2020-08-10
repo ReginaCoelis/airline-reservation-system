@@ -1,31 +1,12 @@
-package com.example.demo.domain;
+package com.example.demo.dto;
 
-import javax.persistence.*;
+public class AirlineDto {
 
-@Entity
-@SecondaryTable(name = "history")
-public class Airline {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(length = 3, nullable = false)
     private String code;
-    @Column(nullable = false)
     private String name;
-    @Lob
-    @Column(table = "history")
     private String history;
 
-    public Airline(){}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public AirlineDto(){}
 
     public String getCode() {
         return code;
