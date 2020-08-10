@@ -1,9 +1,9 @@
-package com.example.demo.dto;
+package com.example.demo.dto.request;
 
 import java.util.Date;
 import java.util.Set;
 
-public class ReservationDto {
+public class ReservationRequest {
 
     private Long id;
     private String reservationCode;

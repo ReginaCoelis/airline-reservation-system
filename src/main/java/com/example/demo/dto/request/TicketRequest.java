@@ -1,8 +1,8 @@
-package com.example.demo.dto;
+package com.example.demo.dto.request;
 
 import java.util.Date;
 
-public class TicketDto {
+public class TicketRequest {
 
     private Long id;
     private Integer flightNumber;
@@ -16,15 +16,15 @@ public class TicketDto {
 
     private Date issuedAt;
 
-    private ReservationDto reservation;
+    private ReservationRequest reservation;
 
-    public TicketDto() {
+    public TicketRequest() {
         super();
     }
 
-    public TicketDto(Integer flightNumber, String airlineName, String depratureAirport, String arrivalAirport,
-                     Date departureTime, Date departureDate,
-                     Date arrivalTime, Date arrivalDate, ReservationDto reservation) {
+    public TicketRequest(Integer flightNumber, String airlineName, String depratureAirport, String arrivalAirport,
+                         Date departureTime, Date departureDate,
+                         Date arrivalTime, Date arrivalDate, ReservationRequest reservation) {
         super();
         this.flightNumber = flightNumber;
         this.airlineName = airlineName;
@@ -119,11 +119,11 @@ public class TicketDto {
         this.issuedAt = issuedAt;
     }
 
-    public ReservationDto getReservation() {
+    public ReservationRequest getReservation() {
         return reservation;
     }
 
-    public void setReservation(ReservationDto reservation) {
+    public void setReservation(ReservationRequest reservation) {
         this.reservation = reservation;
     }
 

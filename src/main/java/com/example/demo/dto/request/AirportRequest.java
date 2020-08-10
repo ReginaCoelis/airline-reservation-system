@@ -1,12 +1,12 @@
-package com.example.demo.dto;
+package com.example.demo.dto.request;
 
-public class AirlineDto {
+public class AirportRequest {
 
     private String code;
     private String name;
-    private String history;
+    private Address address;
 
-    public AirlineDto(){}
+    public AirportRequest(){}
 
     public String getCode() {
         return code;
@@ -24,11 +24,11 @@ public class AirlineDto {
         this.name = name;
     }
 
-    public String getHistory() {
-        return history;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setHistory(String history) {
-        this.history = history;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

@@ -1,12 +1,12 @@
-package com.example.demo.dto;
+package com.example.demo.dto.request;
 
-public class PassengerDto {
+public class PassengerRequest {
 
     private String name;
     private String role;
     private String email;
 
-    public PassengerDto(){
+    public PassengerRequest(){
 
     }
 

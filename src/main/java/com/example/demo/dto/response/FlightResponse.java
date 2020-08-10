@@ -1,22 +1,22 @@
-package com.example.demo.dto;
+package com.example.demo.dto.response;
 
 import java.util.Date;
 
-public class FlightDto {
+public class FlightResponse {
 
     private Long id;
     private Integer flightNumber;
     private Integer capacity;
-    private AirportDto departureAirport;
+    private AirportResponse departureAirport;
     private Date departureTime;
     private Date departureDate;
-    private AirportDto arrivalAirport;
+    private AirportResponse arrivalAirport;
     private Date arrivalTime;
     private Date arrivalDate;
-    private AirlineDto airline;
+    private AirlineResponse airline;
 
     // default constructor
-    public FlightDto() {
+    public FlightResponse() {
     }
 
     public Long getId() {
@@ -43,11 +43,11 @@ public class FlightDto {
         this.capacity = capacity;
     }
 
-    public AirportDto getDepartureAirport() {
+    public AirportResponse getDepartureAirport() {
         return departureAirport;
     }
 
-    public void setDepartureAirport(AirportDto departureAirport) {
+    public void setDepartureAirport(AirportResponse departureAirport) {
         this.departureAirport = departureAirport;
     }
 
@@ -69,11 +69,11 @@ public class FlightDto {
 
     }
 
-    public AirportDto getArrivalAirport() {
+    public AirportResponse getArrivalAirport() {
         return arrivalAirport;
     }
 
-    public void setArrivalAirport(AirportDto arrivalAirport) {
+    public void setArrivalAirport(AirportResponse arrivalAirport) {
         this.arrivalAirport = arrivalAirport;
     }
 
@@ -93,11 +93,11 @@ public class FlightDto {
         this.arrivalDate = arrivalDate;
     }
 
-    public AirlineDto getAirline() {
+    public AirlineResponse getAirline() {
         return airline;
     }
 
-    public void setAirline(AirlineDto airline) {
+    public void setAirline(AirlineResponse airline) {
         this.airline = airline;
     }
 }
