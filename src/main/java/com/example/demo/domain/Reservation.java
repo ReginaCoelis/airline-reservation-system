@@ -12,7 +12,6 @@ public class Reservation {
     private Long id;
 
     private String reservationCode;
-
     @ElementCollection
     @CollectionTable(name = "reservation_flight_numbers", joinColumns = @JoinColumn(name = "reservation_id"))
     @Column(name = "flight_number")
