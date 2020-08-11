@@ -8,8 +8,8 @@
         <version>2.3.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
-    <artifactId>demo</artifactId>
+    <groupId>com.airline</groupId>
+    <artifactId>reservation</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Airline-Reservation System</name>
     <description>Spring Boot project for airline reservation</description>
@@ -96,6 +96,11 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
