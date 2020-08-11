@@ -46,20 +46,20 @@ public class FlightServiceImpl implements FlightService {
 
 
     @Override
-    public FlightResponse addFlight(FlightRequest requestFlight) {
-        Airline airline= airlineRepository.findByCode(requestFlight.getAirline().getCode());
-        Airport departureAirport= airportRepository.findByCode(requestFlight.getDepartureAirport().getCode());
-        Airport originAirport= airportRepository.findByCode(requestFlight.getArrivalAirport().getCode());
+    public FlightResponse addFlight(FlightRequest flightRequest) {
+        Airline airline= airlineRepository.findByCode(flightRequest.getAirlineCode());
+        Airport departureAirport= airportRepository.findByCode(flightRequest.getDepartureAirport());
+        Airport originAirport= airportRepository.findByCode(flightRequest.getArrivalAirport());
 
         Flight flight=new Flight();
         flight.setDepartureAirport(departureAirport);
         flight.setArrivalAirport(originAirport);
-        flight.setFlightNumber(requestFlight.getFlightNumber());
-        flight.setCapacity(requestFlight.getCapacity());
-        flight.setDepartureTime(requestFlight.getDepartureTime());
-        flight.setDepartureDate(requestFlight.getDepartureDate());
-        flight.setArrivalTime(requestFlight.getArrivalTime());
-        flight.setArrivalDate(requestFlight.getArrivalDate());
+        flight.setFlightNumber(flightRequest.getFlightNumber());
+        flight.setCapacity(flightRequest.getCapacity());
+        flight.setDepartureTime(flightRequest.getDepartureTime());
+        flight.setDepartureDate(flightRequest.getDepartureDate());
+        flight.setArrivalTime(flightRequest.getArrivalTime());
+        flight.setArrivalDate(flightRequest.getArrivalDate());
         flight.setAirline(airline);
 
         return covertFlightToFlightResponse(flightRepository.save(flight));
