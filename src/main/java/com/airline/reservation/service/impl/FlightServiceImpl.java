@@ -11,6 +11,7 @@ import com.airline.reservation.repository.AirportRepository;
 import com.airline.reservation.repository.FlightRepository;
 import com.airline.reservation.repository.ReservationRepository;
 import com.airline.reservation.service.FlightService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

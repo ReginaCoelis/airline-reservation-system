@@ -3,6 +3,7 @@ package com.airline.reservation.controller;
 import com.airline.reservation.domain.Flight;
 import com.airline.reservation.domain.Passenger;
 import com.airline.reservation.service.impl.FlightServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
