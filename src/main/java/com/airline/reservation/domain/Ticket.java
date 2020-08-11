@@ -2,13 +2,14 @@ package com.airline.reservation.domain;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@NamedQuery(
+        name="Ticket.getTicketsByPassengerId",
+        query = "SELECT distinct t FROM Ticket t WHERE t.passenger.id=:id"
+)
 public class Ticket {
 
     @Id
@@ -27,6 +28,10 @@ public class Ticket {
 
     @ManyToOne
     private Reservation reservation;
+
+    @OneToOne
+    @JoinColumn(name = "passenger_id")
+    private Passenger passenger;
 
     public Ticket() {
         super();
@@ -137,5 +142,11 @@ public class Ticket {
         this.reservation = reservation;
     }
 
+    public Passenger getPassenger() {
+        return passenger;
+    }
 
+    public void setPassenger(Passenger passenger) {
+        this.passenger = passenger;
+    }
 }

@@ -2,10 +2,7 @@ package com.airline.reservation.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Data
@@ -34,4 +31,5 @@ public class Passenger {
     public String getRole() { return role; }
 
     public void setRole(String role) { this.role = role; }
+
 }

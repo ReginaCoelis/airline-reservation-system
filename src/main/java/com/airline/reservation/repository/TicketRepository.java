@@ -8,8 +8,8 @@ import java.util.List;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
-    public List<Ticket> findByFlightNumber(Integer flightNumber);
-//    public Ticket getTicketsByFlightName(String flightName);
-//    public Ticket getTicketByPassengerName(String name);
-//    public Ticket getTicketByPassengerEmail(String email);
+    public List<Ticket> getTicketsByFlightNumber(Integer flightNumber);
+
+    public List<Ticket> getTicketsByPassengerId(Long id);
+
 }
