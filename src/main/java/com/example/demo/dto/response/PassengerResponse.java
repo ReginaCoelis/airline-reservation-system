@@ -2,35 +2,35 @@ package com.example.demo.dto.response;
 
 public class PassengerResponse {
 
-    private String name;
-    private String role;
-    private String email;
+    private AirlineResponse name;
+    private AirlineResponse role;
+    private AirlineResponse email;
 
     public PassengerResponse(){
 
     }
 
-    public String getName() {
+    public AirlineResponse getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(AirlineResponse name) {
         this.name = name;
     }
 
-    public String getRole() {
+    public AirlineResponse getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(AirlineResponse role) {
         this.role = role;
     }
 
-    public String getEmail() {
+    public AirlineResponse getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(AirlineResponse email) {
         this.email = email;
     }
 }

@@ -7,16 +7,29 @@ public class FlightResponse {
     private Long id;
     private Integer flightNumber;
     private Integer capacity;
-    private AirportResponse departureAirport;
+    private String departureAirport;
     private Date departureTime;
     private Date departureDate;
-    private AirportResponse arrivalAirport;
+    private String arrivalAirport;
     private Date arrivalTime;
     private Date arrivalDate;
-    private AirlineResponse airline;
+    private String airline;
 
     // default constructor
     public FlightResponse() {
+    }
+
+    public FlightResponse(Long id, Integer flightNumber, Integer capacity, String departureAirport, Date departureTime, Date departureDate, String arrivalAirport, Date arrivalTime, Date arrivalDate, String airline) {
+        this.id = id;
+        this.flightNumber = flightNumber;
+        this.capacity = capacity;
+        this.departureAirport = departureAirport;
+        this.departureTime = departureTime;
+        this.departureDate = departureDate;
+        this.arrivalAirport = arrivalAirport;
+        this.arrivalTime = arrivalTime;
+        this.arrivalDate = arrivalDate;
+        this.airline = airline;
     }
 
     public Long getId() {
@@ -43,11 +56,11 @@ public class FlightResponse {
         this.capacity = capacity;
     }
 
-    public AirportResponse getDepartureAirport() {
+    public String getDepartureAirport() {
         return departureAirport;
     }
 
-    public void setDepartureAirport(AirportResponse departureAirport) {
+    public void setDepartureAirport(String departureAirport) {
         this.departureAirport = departureAirport;
     }
 
@@ -69,11 +82,11 @@ public class FlightResponse {
 
     }
 
-    public AirportResponse getArrivalAirport() {
+    public String getArrivalAirport() {
         return arrivalAirport;
     }
 
-    public void setArrivalAirport(AirportResponse arrivalAirport) {
+    public void setArrivalAirport(String arrivalAirport) {
         this.arrivalAirport = arrivalAirport;
     }
 
@@ -93,11 +106,11 @@ public class FlightResponse {
         this.arrivalDate = arrivalDate;
     }
 
-    public AirlineResponse getAirline() {
+    public String getAirline() {
         return airline;
     }
 
-    public void setAirline(AirlineResponse airline) {
+    public void setAirline(String airline) {
         this.airline = airline;
     }
 }
