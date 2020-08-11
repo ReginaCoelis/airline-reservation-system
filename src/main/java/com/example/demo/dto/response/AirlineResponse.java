@@ -2,33 +2,33 @@ package com.example.demo.dto.response;
 
 public class AirlineResponse {
 
-    private String code;
-    private String name;
-    private String history;
+    private AirportResponse code;
+    private AirportResponse name;
+    private AirportResponse history;
 
     public AirlineResponse(){}
 
-    public String getCode() {
+    public AirportResponse getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(AirportResponse code) {
         this.code = code;
     }
 
-    public String getName() {
+    public AirportResponse getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(AirportResponse name) {
         this.name = name;
     }
 
-    public String getHistory() {
+    public AirportResponse getHistory() {
         return history;
     }
 
-    public void setHistory(String history) {
+    public void setHistory(AirportResponse history) {
         this.history = history;
     }
 }

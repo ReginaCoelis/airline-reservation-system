@@ -51,29 +51,22 @@ public class FlightServiceImpl implements FlightService {
         flight.setAirline(airline);
 
         return covertFlightToFlightResponse(flightRepository.save(flight));
-
-
     }
 
     @Override
     public FlightResponse getFlightByNumber(Integer flightNumber) {
         return covertFlightToFlightResponse(flightRepository.getByFlightNumber(flightNumber));
-
     }
 
     @Override
     public List<FlightResponse> getAllFlights() {
         return flightRepository.findAll().stream().parallel().map(this::covertFlightToFlightResponse).collect(Collectors.toList());
 
-
     }
 
     private FlightResponse covertFlightToFlightResponse(Flight flight){
-
-        return new FlightResponse();
+        return new FlightResponse(flight.getId(), flight.getFlightNumber(), flight.getCapacity(), flight.getDepartureAirport().getCode(), flight.getDepartureTime(),flight.getDepartureDate(),flight.getArrivalAirport().getCode(),flight.getArrivalTime(),flight.getArrivalDate(), flight.getAirline().getCode());
 
     }
-
-
 
 }

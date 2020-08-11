@@ -6,9 +6,9 @@ public class TicketResponse {
 
     private Long id;
     private Integer flightNumber;
-    private String airlineName;
-    private String depratureAirport;
-    private String arrivalAirport;
+    private AirlineResponse airlineName;
+    private AirlineResponse depratureAirport;
+    private AirlineResponse arrivalAirport;
     private Date departureTime;
     private Date departureDate;
     private Date arrivalTime;
@@ -22,7 +22,7 @@ public class TicketResponse {
         super();
     }
 
-    public TicketResponse(Integer flightNumber, String airlineName, String depratureAirport, String arrivalAirport,
+    public TicketResponse(Integer flightNumber, AirlineResponse airlineName, AirlineResponse depratureAirport, AirlineResponse arrivalAirport,
                           Date departureTime, Date departureDate,
                           Date arrivalTime, Date arrivalDate, ReservationResponse reservation) {
         super();
@@ -54,27 +54,27 @@ public class TicketResponse {
         this.flightNumber = flightNumber;
     }
 
-    public String getAirlineName() {
+    public AirlineResponse getAirlineName() {
         return airlineName;
     }
 
-    public void setAirlineName(String airlineName) {
+    public void setAirlineName(AirlineResponse airlineName) {
         this.airlineName = airlineName;
     }
 
-    public String getDepratureAirport() {
+    public AirlineResponse getDepratureAirport() {
         return depratureAirport;
     }
 
-    public void setDepratureAirport(String depratureAirport) {
+    public void setDepratureAirport(AirlineResponse depratureAirport) {
         this.depratureAirport = depratureAirport;
     }
 
-    public String getArrivalAirport() {
+    public AirlineResponse getArrivalAirport() {
         return arrivalAirport;
     }
 
-    public void setArrivalAirport(String arrivalAirport) {
+    public void setArrivalAirport(AirlineResponse arrivalAirport) {
         this.arrivalAirport = arrivalAirport;
     }
 

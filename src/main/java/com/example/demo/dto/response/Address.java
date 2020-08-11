@@ -4,40 +4,40 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Address {
-    private String street;
-    private String city;
-    private String state;
-    private String zip;
+    private AirlineResponse street;
+    private AirlineResponse city;
+    private AirlineResponse state;
+    private AirlineResponse zip;
 
-    public String getStreet() {
+    public AirlineResponse getStreet() {
         return street;
     }
 
-    public void setStreet(String street) {
+    public void setStreet(AirlineResponse street) {
         this.street = street;
     }
 
-    public String getCity() {
+    public AirlineResponse getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(AirlineResponse city) {
         this.city = city;
     }
 
-    public String getState() {
+    public AirlineResponse getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(AirlineResponse state) {
         this.state = state;
     }
 
-    public String getZip() {
+    public AirlineResponse getZip() {
         return zip;
     }
 
-    public void setZip(String zip) {
+    public void setZip(AirlineResponse zip) {
         this.zip = zip;
     }
 }
