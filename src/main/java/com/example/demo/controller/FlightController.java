@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Flight;
 import com.example.demo.domain.Passenger;
-import com.example.demo.service.impl.FlightServiceImpl;
+import com.example.demo.service.Implementation.FlightServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

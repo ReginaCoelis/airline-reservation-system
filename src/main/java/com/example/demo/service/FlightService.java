@@ -4,8 +4,6 @@ import com.example.demo.domain.Flight;
 import com.example.demo.domain.Passenger;
 import com.example.demo.dto.request.FlightRequest;
 import com.example.demo.dto.response.FlightResponse;
-import com.example.demo.service.impl.FlightServiceImpl;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
