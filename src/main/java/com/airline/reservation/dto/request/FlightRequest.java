@@ -7,16 +7,29 @@ public class FlightRequest {
     private Long id;
     private Integer flightNumber;
     private Integer capacity;
-    private AirportRequest departureAirport;
+    private String departureAirport;
     private Date departureTime;
     private Date departureDate;
-    private AirportRequest arrivalAirport;
+    private String arrivalAirport;
     private Date arrivalTime;
     private Date arrivalDate;
-    private AirlineRequest airline;
+    private String airlineCode;
 
     // default constructor
     public FlightRequest() {
+    }
+
+
+    public FlightRequest(Integer flightNumber, Integer capacity, String departureAirport, Date departureTime, Date departureDate, String arrivalAirport, Date arrivalTime, Date arrivalDate, String airlineCode) {
+        this.flightNumber = flightNumber;
+        this.capacity = capacity;
+        this.departureAirport = departureAirport;
+        this.departureTime = departureTime;
+        this.departureDate = departureDate;
+        this.arrivalAirport = arrivalAirport;
+        this.arrivalTime = arrivalTime;
+        this.arrivalDate = arrivalDate;
+        this.airlineCode = airlineCode;
     }
 
     public Long getId() {
@@ -43,11 +56,11 @@ public class FlightRequest {
         this.capacity = capacity;
     }
 
-    public AirportRequest getDepartureAirport() {
+    public String getDepartureAirport() {
         return departureAirport;
     }
 
-    public void setDepartureAirport(AirportRequest departureAirport) {
+    public void setDepartureAirport(String departureAirport) {
         this.departureAirport = departureAirport;
     }
 
@@ -69,11 +82,11 @@ public class FlightRequest {
 
     }
 
-    public AirportRequest getArrivalAirport() {
+    public String getArrivalAirport() {
         return arrivalAirport;
     }
 
-    public void setArrivalAirport(AirportRequest arrivalAirport) {
+    public void setArrivalAirport(String arrivalAirport) {
         this.arrivalAirport = arrivalAirport;
     }
 
@@ -93,11 +106,11 @@ public class FlightRequest {
         this.arrivalDate = arrivalDate;
     }
 
-    public AirlineRequest getAirline() {
-        return airline;
+    public String getAirlineCode() {
+        return airlineCode;
     }
 
-    public void setAirline(AirlineRequest airline) {
-        this.airline = airline;
+    public void setAirlineCode(String airlineCode) {
+        this.airlineCode = airlineCode;
     }
 }
