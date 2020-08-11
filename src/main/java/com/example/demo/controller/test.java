@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -9,4 +10,7 @@ public class test {
     public String getId(){
       return "Hello There";
     }
+
+    @PostMapping("/")
+    public void save(){}
 }
