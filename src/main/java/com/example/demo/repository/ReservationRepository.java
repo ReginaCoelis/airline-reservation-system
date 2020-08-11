@@ -12,7 +12,7 @@ import java.util.Set;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     public Reservation findByReservationCode(String reservationCode);
 
-    @Query("SELECT flightNumbers FROM Reservation WHERE passengerId = ?1")
+    @Query(value = "SELECT r.flightNumbers FROM Reservation r WHERE r.passengerId = ?1", nativeQuery=true)
     public Set<Integer> findFlightNumbers(Integer passengerId);
 
 }
