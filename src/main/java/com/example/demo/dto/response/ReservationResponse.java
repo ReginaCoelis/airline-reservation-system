@@ -6,7 +6,7 @@ import java.util.Set;
 public class ReservationResponse {
 
     private Long id;
-    private String reservationCode;
+    private AirlineResponse reservationCode;
     private Set<Integer> flightNumbers;
 
     private Long passengerId;
@@ -96,11 +96,11 @@ public class ReservationResponse {
         this.lastUpdateDate = lastUpdateDate;
     }
 
-    public String getReservationCode() {
+    public AirlineResponse getReservationCode() {
         return reservationCode;
     }
 
-    public void setReservationCode(String reservationCode) {
+    public void setReservationCode(AirlineResponse reservationCode) {
         this.reservationCode = reservationCode;
     }
 

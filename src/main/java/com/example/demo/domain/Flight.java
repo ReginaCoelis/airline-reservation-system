@@ -36,6 +36,8 @@ public class Flight {
     @Temporal(TemporalType.DATE)
     private Date arrivalDate;
 
+    private Integer seatsAvailable;
+
     @ManyToOne
     @JoinColumn(name = "airlineid")
     private Airline airline;
@@ -80,19 +82,17 @@ public class Flight {
         return departureTime;
     }
 
-    public Date getDepartureDate() {
-        return departureDate;
-
-    }
+    public Date getDepartureDate() { return departureDate; }
 
     public void setDepartureDate(Date departureDate) {
         this.departureDate = departureDate;
     }
 
-    public void setDepartureTime(Date departureTime) {
-        this.departureTime = departureTime;
+    public void setDepartureTime(Date departureTime) { this.departureTime = departureTime; }
 
-    }
+    public void setSeatsAvailable(Integer seatsAvailable) { this.seatsAvailable = seatsAvailable; }
+
+    public Integer getSeatsAvailable() { return seatsAvailable; }
 
     public Airport getArrivalAirport() {
         return arrivalAirport;
