@@ -12,5 +12,5 @@ public interface AirlineRepository extends JpaRepository<Airline, Long> {
 
     Airline findByCode(String airlineCode);
 
-    List<Airline> getAllAirlinesOutOfAnAirport(String airportCode);
+    //List<Airline> getAllAirlinesOutOfAnAirport(String airportCode);
 }

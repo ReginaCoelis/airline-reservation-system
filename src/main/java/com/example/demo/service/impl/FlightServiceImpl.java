@@ -1,20 +1,25 @@
 package com.example.demo.service.impl;
 
 
-import com.example.demo.domain.Airline;
-import com.example.demo.domain.Airport;
-import com.example.demo.domain.Flight;
+import com.example.demo.domain.*;
 import com.example.demo.dto.request.FlightRequest;
 import com.example.demo.dto.response.FlightResponse;
+import com.example.demo.exception.EmailFailureException;
+import com.example.demo.exception.FlightNotFoundException;
 import com.example.demo.repository.AirlineRepository;
 import com.example.demo.repository.AirportRepository;
 import com.example.demo.repository.FlightRepository;
+import com.example.demo.repository.ReservationRepository;
 import com.example.demo.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -23,7 +28,13 @@ import java.util.stream.Collectors;
 public class FlightServiceImpl implements FlightService {
 
     @Autowired
+    private JavaMailSender javaMailSender;
+
+    @Autowired
     private FlightRepository flightRepository;
+
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     @Autowired
     private AirlineRepository airlineRepository;
@@ -66,6 +77,81 @@ public class FlightServiceImpl implements FlightService {
 
     private FlightResponse covertFlightToFlightResponse(Flight flight){
         return new FlightResponse(flight.getId(), flight.getFlightNumber(), flight.getCapacity(), flight.getDepartureAirport().getCode(), flight.getDepartureTime(),flight.getDepartureDate(),flight.getArrivalAirport().getCode(),flight.getArrivalTime(),flight.getArrivalDate(), flight.getAirline().getCode());
+
+    }
+
+
+    @Override
+    public Flight getFlightByPassengerId(Integer passengerId) {
+        Flight flight = null;
+        Set<Integer> flightNumbers = reservationRepository.findFlightNumbers(passengerId);
+
+        for(int flightNumber : flightNumbers) {
+            flight = flightRepository.getByFlightNumber(flightNumber);
+        }
+        return flight;
+    }
+
+    public void sendEmail() throws EmailFailureException {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo("dummy@gmail.com");
+        message.setSubject("Dummy Subject");
+        message.setText("Just Dummy Text");
+
+        javaMailSender.send(message);
+    }
+
+    public boolean checkSeatAvailability(int flightId) {
+        boolean fullStatus = false;
+        Optional<Flight> flight = flightRepository.findById((long) flightId);
+
+        if(!flight.isPresent()) {
+            Flight currentFlight = flight.get();
+            if(currentFlight.getSeatsAvailable() > 0) {
+                fullStatus = true;
+            }
+        }
+
+        return fullStatus;
+    }
+
+    public void handleEmail(Reservation reservation, Passenger passenger) {
+        System.out.println("=========================");
+        System.out.println("=======Send Email========");
+        System.out.println("=========================");
+        System.out.println("Passenger: " + passenger.getEmail());
+        System.out.println("Reservation: " + reservation.getId());
+
+        try{
+            sendEmail();
+        }catch (EmailFailureException ex) {
+            throw ex;
+        }
+    }
+
+    @Override
+    public void bookFlight(int flightId, Passenger passenger) {
+        Optional<Flight> flight = flightRepository.findById((long) flightId);
+
+        if(!flight.isPresent())
+            throw new FlightNotFoundException("Flight not found");
+
+        if(checkSeatAvailability(flightId) == true) {
+            Flight currentFlight = flight.get();
+            Reservation booking = new Reservation();
+
+            booking.setConfirmed(true);
+            booking.setPassengerId(passenger.getId());
+            reservationRepository.save(booking);
+
+            Integer currentSeats = currentFlight.getSeatsAvailable();
+            currentFlight.setSeatsAvailable(currentSeats - 1);
+            flightRepository.save(currentFlight);
+
+            handleEmail(booking, passenger);
+        } else {
+            System.out.println("Flight is full");
+        }
 
     }
 
