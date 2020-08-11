@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -17,17 +19,23 @@ public class TicketServiceImplementation implements TicketService {
     TicketRepository ticketRepository;
 
     @Override
-    public TicketResponse getTicketsByFlightNumber(Integer flightNumber) {
-        return convertTicketToTicketResponse(ticketRepository.getTicketsByFlightNumber(flightNumber));
+    public List<TicketResponse> getTicketsByFlightNumber(Integer flightNumber) {
+        return convertTicketsToTicketResponses(ticketRepository.getTicketsByFlightNumber(flightNumber));
     }
 
-//    @Override
-//    public TicketResponse getTicketByPassengerName(String name) {
-//        return convertTicketToTicketResponse(ticketRepository.getTicketByPassengerName(name));
-//    }
+    @Override
+    public List<TicketResponse> getTicketByPassengerId(Long id) {
+        return convertTicketsToTicketResponses(ticketRepository.getTicketsByPassengerId(id));
+    }
 
-    public TicketResponse convertTicketToTicketResponse(Ticket ticket){
-        return new TicketResponse(ticket.getFlightNumber(), ticket.getAirlineName(), ticket.getDepratureAirport(), ticket.getArrivalAirport(), ticket.getDepartureTime(),
-                ticket.getDepartureDate(), ticket.getArrivalTime(), ticket.getArrivalDate());
+    public List<TicketResponse> convertTicketsToTicketResponses(List<Ticket> ticket){
+        TicketResponse ticketResponse;
+        List<TicketResponse> ticketResponses = new ArrayList<>();
+        for(Ticket t : ticket){
+            ticketResponse = new TicketResponse(t.getFlightNumber(), t.getAirlineName(), t.getDepratureAirport(), t.getArrivalAirport(), t.getDepartureTime(),
+                    t.getDepartureDate(), t.getArrivalTime(), t.getArrivalDate());
+            ticketResponses.add(ticketResponse);
+        }
+        return ticketResponses;
     }
 }

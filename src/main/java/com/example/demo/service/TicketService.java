@@ -5,7 +5,9 @@ import com.example.demo.dto.request.PassengerRequest;
 import com.example.demo.dto.response.PassengerResponse;
 import com.example.demo.dto.response.TicketResponse;
 
+import java.util.List;
+
 public interface TicketService {
-    public TicketResponse getTicketsByFlightNumber(Integer flightNumber);
-//    public TicketResponse getTicketByPassengerName(String name);
+    public List<TicketResponse> getTicketsByFlightNumber(Integer flightNumber);
+    public List<TicketResponse> getTicketByPassengerId(Long id);
 }
