@@ -86,10 +86,12 @@ public class FlightServiceImpl implements FlightService {
     public Flight getFlightByPassengerId(Integer passengerId) {
         Flight flight = null;
         Set<Integer> flightNumbers = reservationRepository.findFlightNumbers(passengerId);
+        System.out.println("First: " + flightNumbers);
 
         for(int flightNumber : flightNumbers) {
             flight = flightRepository.getByFlightNumber(flightNumber);
         }
+        System.out.println("Second: " + flight);
         return flight;
     }
 
