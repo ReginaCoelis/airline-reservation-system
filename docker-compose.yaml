@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  mysql_host:
+    image: mysql:latest
+    container_name: reservation_db
+    command:
+      - "--default-authentication-plugin=mysql_native_password"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./docker/mysql/:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_DATABASE: reservation-db
+      MYSQL_USER: flight
+      MYSQL_PASSWORD: flight
+      MYSQL_ROOT_PASSWORD: flight
