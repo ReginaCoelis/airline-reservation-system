@@ -5,7 +5,12 @@ import com.example.demo.dto.response.TicketResponse;
 import com.example.demo.repository.TicketRepository;
 import com.example.demo.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
+@Service
+@Transactional
 public class TicketServiceImplementation implements TicketService {
 
     @Autowired
@@ -16,20 +21,10 @@ public class TicketServiceImplementation implements TicketService {
         return convertTicketToTicketResponse(ticketRepository.getTicketsByFlightNumber(flightNumber));
     }
 
-    @Override
-    public TicketResponse getTicketsByFlightName(String flightName) {
-        return convertTicketToTicketResponse(ticketRepository.getTicketsByFlightName(flightName));
-    }
-
-    @Override
-    public TicketResponse getTicketByPassengerName(String name) {
-        return convertTicketToTicketResponse(ticketRepository.getTicketByPassengerName(name));
-    }
-
-    @Override
-    public TicketResponse getTicketByPassengerEmail(String email) {
-        return convertTicketToTicketResponse(ticketRepository.getTicketByPassengerEmail(email));
-    }
+//    @Override
+//    public TicketResponse getTicketByPassengerName(String name) {
+//        return convertTicketToTicketResponse(ticketRepository.getTicketByPassengerName(name));
+//    }
 
     public TicketResponse convertTicketToTicketResponse(Ticket ticket){
         return new TicketResponse(ticket.getFlightNumber(), ticket.getAirlineName(), ticket.getDepratureAirport(), ticket.getArrivalAirport(), ticket.getDepartureTime(),

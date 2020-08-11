@@ -7,7 +7,5 @@ import com.example.demo.dto.response.TicketResponse;
 
 public interface TicketService {
     public TicketResponse getTicketsByFlightNumber(Integer flightNumber);
-    public TicketResponse getTicketsByFlightName(String flightName);
-    public TicketResponse getTicketByPassengerName(String name);
-    public TicketResponse getTicketByPassengerEmail(String email);
+//    public TicketResponse getTicketByPassengerName(String name);
 }
