@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api")
 public class FlightController {
 
     private FlightServiceImpl flightService;
@@ -17,7 +18,12 @@ public class FlightController {
         this.flightService = flightService;
     }
 
-    @RequestMapping(value = "/flight/{passengerId}", method = RequestMethod.GET)
+    @GetMapping("/")
+    public String hello() {
+        return "Welcome To The Airline Reservation Application";
+    }
+
+    @RequestMapping(value = "/flights/{passengerId}", method = RequestMethod.GET)
     public Flight getFlightByPassenger(@PathVariable int passengerId) {
         return flightService.getFlightByPassengerId(passengerId);
     }
