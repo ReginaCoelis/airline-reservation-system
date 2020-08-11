@@ -1,4 +1,4 @@
-package com.example.demo.service.impl;
+package com.example.demo.service.Implementation;
 
 import com.example.demo.domain.Passenger;
 import com.example.demo.exception.EmailExistsException;
