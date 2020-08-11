@@ -24,7 +24,8 @@ public class TicketResponse {
 
     public TicketResponse(Integer flightNumber, String airlineName, String depratureAirport, String arrivalAirport,
                           Date departureTime, Date departureDate,
-                          Date arrivalTime, Date arrivalDate, ReservationResponse reservation) {
+                          Date arrivalTime, Date arrivalDate) {
+        //, ReservationResponse reservation
         super();
         this.flightNumber = flightNumber;
         this.airlineName = airlineName;
