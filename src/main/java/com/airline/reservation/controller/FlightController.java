@@ -38,8 +38,9 @@ public class FlightController {
         return flightService.getAllFlights();
     }
 
+
     @RequestMapping(value = "/flights/passengers/{passengerId}", method = RequestMethod.GET)
-    public Flight getFlightByPassengerId(@PathVariable int passengerId) {
+    public Flight getFlightByPassenger(@PathVariable int passengerId) {
         return flightService.getFlightByPassengerId(passengerId);
     }
 

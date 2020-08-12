@@ -88,13 +88,17 @@ public class Flight {
         return departureTime;
     }
 
-    public LocalDate getDepartureDate() { return departureDate; }
+    public void setDepartureTime(LocalTime departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public LocalDate getDepartureDate() {
+        return departureDate;
+    }
 
     public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
     }
-
-    public void setDepartureTime(LocalTime departureTime) { this.departureTime = departureTime; }
 
     public void setSeatsAvailable(Integer seatsAvailable) { this.seatsAvailable = seatsAvailable; }
 
@@ -123,7 +127,6 @@ public class Flight {
     public void setArrivalDate(LocalDate arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
-
     public Airline getAirline() {
         return airline;
     }
@@ -139,5 +142,6 @@ public class Flight {
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
     }
+
 
 }

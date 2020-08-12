@@ -32,15 +32,20 @@ public class Reservation {
 
     private Date createdAt;
 
-    private Date lastUpdateDate;
-
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getReservationCode() {
+        return reservationCode;
+    }
+
+    public void setReservationCode(String reservationCode) {
+        this.reservationCode = reservationCode;
     }
 
     public Set<Integer> getFlightNumbers() {
@@ -79,16 +84,16 @@ public class Reservation {
         return isConfirmed;
     }
 
-    public void setConfirmed(boolean isConfirmed) {
-        this.isConfirmed = isConfirmed;
+    public void setConfirmed(boolean confirmed) {
+        isConfirmed = confirmed;
     }
 
     public boolean isCancelled() {
         return isCancelled;
     }
 
-    public void setCancelled(boolean isCancelled) {
-        this.isCancelled = isCancelled;
+    public void setCancelled(boolean cancelled) {
+        isCancelled = cancelled;
     }
 
     public Date getCreatedAt() {
@@ -107,12 +112,6 @@ public class Reservation {
         this.lastUpdateDate = lastUpdateDate;
     }
 
-    public String getReservationCode() {
-        return reservationCode;
-    }
-
-    public void setReservationCode(String reservationCode) {
-        this.reservationCode = reservationCode;
-    }
+    private Date lastUpdateDate;
 
 }
