@@ -8,8 +8,7 @@ import com.airline.reservation.exception.EmailFailureException;
 import com.airline.reservation.exception.FlightNotFoundException;
 import com.airline.reservation.repository.*;
 import com.airline.reservation.service.FlightService;
-
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -26,7 +25,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-
+@Slf4j
 @Service
 @Transactional
 public class FlightServiceImpl implements FlightService {
@@ -49,8 +48,6 @@ public class FlightServiceImpl implements FlightService {
     @Autowired
     private PassengerRepository passengerRepository;
 
-   @Autowired
-   private RabbitTemplate rabbitTemplate;
 
     @Override
     public FlightResponse addFlight(FlightRequest flightRequest) {
@@ -183,8 +180,9 @@ public class FlightServiceImpl implements FlightService {
             .map(ticket -> passengerRepository.findById(ticket.getReservation().getPassengerId()).get().getEmail())
             .collect(Collectors.toList());
             //send
-
-            rabbitTemplate.convertAndSend("airline.emails",passengerEmails);
+            log.info("Sending emails to {}",passengerEmails);
+            //
+            //rabbitTemplate.convertAndSend("airline.emails",passengerEmails);
         });
     }
 
