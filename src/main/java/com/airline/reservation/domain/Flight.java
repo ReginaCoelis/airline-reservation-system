@@ -100,13 +100,9 @@ public class Flight {
         this.departureDate = departureDate;
     }
 
-<<<<<<< HEAD
     public void setSeatsAvailable(Integer seatsAvailable) { this.seatsAvailable = seatsAvailable; }
 
     public Integer getSeatsAvailable() { return seatsAvailable; }
-
-=======
->>>>>>> adds email functionality
     public Airport getArrivalAirport() {
         return arrivalAirport;
     }
@@ -115,8 +111,6 @@ public class Flight {
         this.arrivalAirport = arrivalAirport;
     }
 
-<<<<<<< HEAD
-=======
     public List<Ticket> getTickets() {
         return tickets;
     }
@@ -125,7 +119,6 @@ public class Flight {
         this.tickets = tickets;
     }
 
->>>>>>> adds email functionality
     public LocalTime getArrivalTime() {
         return arrivalTime;
     }
@@ -141,33 +134,6 @@ public class Flight {
     public void setArrivalDate(LocalDate arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
-<<<<<<< HEAD
-    public Airline getAirline() {
-        return airline;
-    }
-
-    public void setAirline(Airline airline) {
-        this.airline = airline;
-    }
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
-    }
-
-
-=======
-
-    public Integer getSeatsAvailable() {
-        return seatsAvailable;
-    }
-
-    public void setSeatsAvailable(Integer seatsAvailable) {
-        this.seatsAvailable = seatsAvailable;
-    }
 
     public Airline getAirline() {
         return airline;
@@ -176,5 +142,5 @@ public class Flight {
     public void setAirline(Airline airline) {
         this.airline = airline;
     }
->>>>>>> adds email functionality
+
 }

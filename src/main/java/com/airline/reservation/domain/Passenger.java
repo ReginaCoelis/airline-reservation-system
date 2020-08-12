@@ -39,7 +39,6 @@ public class Passenger implements UserDetails {
         return name;
     }
 
-
     @Override
     public String getPassword() {
         return password;
