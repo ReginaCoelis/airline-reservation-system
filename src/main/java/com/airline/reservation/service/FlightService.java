@@ -8,6 +8,7 @@ import com.airline.reservation.dto.response.FlightResponse;
 
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public interface FlightService {
     public FlightResponse addFlight(FlightRequest flightRequest );
@@ -15,5 +16,6 @@ public interface FlightService {
     public List<FlightResponse>getAllFlights();
     public Flight getFlightByPassengerId(Integer passengerId);
     public void bookFlight(int flightId, Passenger passenger);
+    public void notifyUpcomingFlights() throws ExecutionException, InterruptedException;
 
 }
