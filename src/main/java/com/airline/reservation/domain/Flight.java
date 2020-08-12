@@ -100,10 +100,13 @@ public class Flight {
         this.departureDate = departureDate;
     }
 
+<<<<<<< HEAD
     public void setSeatsAvailable(Integer seatsAvailable) { this.seatsAvailable = seatsAvailable; }
 
     public Integer getSeatsAvailable() { return seatsAvailable; }
 
+=======
+>>>>>>> c3a4f7e38dec68842181b0307c868797c6177cf0
     public Airport getArrivalAirport() {
         return arrivalAirport;
     }
@@ -112,6 +115,17 @@ public class Flight {
         this.arrivalAirport = arrivalAirport;
     }
 
+<<<<<<< HEAD
+=======
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
+>>>>>>> c3a4f7e38dec68842181b0307c868797c6177cf0
     public LocalTime getArrivalTime() {
         return arrivalTime;
     }
@@ -127,6 +141,7 @@ public class Flight {
     public void setArrivalDate(LocalDate arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
+<<<<<<< HEAD
     public Airline getAirline() {
         return airline;
     }
@@ -144,4 +159,22 @@ public class Flight {
     }
 
 
+=======
+
+    public Integer getSeatsAvailable() {
+        return seatsAvailable;
+    }
+
+    public void setSeatsAvailable(Integer seatsAvailable) {
+        this.seatsAvailable = seatsAvailable;
+    }
+
+    public Airline getAirline() {
+        return airline;
+    }
+
+    public void setAirline(Airline airline) {
+        this.airline = airline;
+    }
+>>>>>>> c3a4f7e38dec68842181b0307c868797c6177cf0
 }

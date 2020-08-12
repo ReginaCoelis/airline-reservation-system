@@ -17,10 +17,4 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
 //    public Ticket getTicketByPassengerName(String name);
 //    public Ticket getTicketByPassengerEmail(String email);
 
-    public Ticket findTicketByPassengerId(Long passengerId);
-
-//    public Ticket getTicketsByFlightName(String flightName);
-//    public Ticket getTicketByPassengerName(String name);
-//    public Ticket getTicketByPassengerEmail(String email);
-
 }
