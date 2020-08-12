@@ -64,6 +64,8 @@ public class FlightServiceImpl implements FlightService {
 
 
 
+
+
     @Override
     public FlightResponse addFlight(FlightRequest flightRequest) {
         Airline airline= airlineRepository.findByCode(flightRequest.getAirlineCode());
@@ -118,6 +120,10 @@ public class FlightServiceImpl implements FlightService {
         message.setTo(emailTo);
         message.setSubject(subject);
         message.setText(body);
+<<<<<<< HEAD
+=======
+
+>>>>>>> adds email functionality
         emailService.getJavaMailSender().send(message);
     }
 
@@ -197,6 +203,10 @@ public class FlightServiceImpl implements FlightService {
             ticketRepository.save(currentTicket);
 
             handleEmail(booking, passenger, currentTicket);
+<<<<<<< HEAD
+=======
+
+>>>>>>> adds email functionality
         } else {
             System.out.println("Flight is full");
         }

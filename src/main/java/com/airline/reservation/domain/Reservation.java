@@ -75,6 +75,8 @@ public class Reservation {
     public Long getMadeByAgentId() {
         return madeByAgentId;
     }
+<<<<<<< HEAD
+=======
 
     public void setMadeByAgentId(Long madeByAgentId) {
         this.madeByAgentId = madeByAgentId;
@@ -113,5 +115,45 @@ public class Reservation {
     }
 
     private Date lastUpdateDate;
+>>>>>>> adds email functionality
+
+    public void setMadeByAgentId(Long madeByAgentId) {
+        this.madeByAgentId = madeByAgentId;
+    }
+
+    public boolean isConfirmed() {
+        return isConfirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        isConfirmed = confirmed;
+    }
+
+    public boolean isCancelled() {
+        return isCancelled;
+    }
+
+    public void setCancelled(boolean cancelled) {
+        isCancelled = cancelled;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getLastUpdateDate() {
+        return lastUpdateDate;
+    }
+
+    public void setLastUpdateDate(Date lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
+    }
+
+    private Date lastUpdateDate;
+
 
 }
