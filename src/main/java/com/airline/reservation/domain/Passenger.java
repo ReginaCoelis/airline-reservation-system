@@ -1,35 +1,59 @@
 package com.airline.reservation.domain;
 
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Data
 @Entity
-public class Passenger {
-
+public class Passenger implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String role;
+    @OneToMany
+    private List<Role> roles;
     private String email;
+    private String password;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+    }
 
-    public Long getId() { return id; }
+    @Override
+    public String getPassword() {
+        return password;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    @Override
+    public String getUsername() {
+        return email;
+    }
 
-    public String getName() { return name; }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-    public void setName(String name) { this.name = name; }
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
-    public String getEmail() { return email; }
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 
-    public void setEmail(String email) { this.email = email; }
-
-    public String getRole() { return role; }
-
-    public void setRole(String role) { this.role = role; }
-
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

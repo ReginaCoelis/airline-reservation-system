@@ -1,0 +1,28 @@
+{
+  "properties": [
+    {
+      "name": "airline.reservation.jwt.secret",
+      "type": "java.lang.String",
+      "description": "Description for airline.reservation.jwt.secret."
+    },
+    {
+      "name": "airline.reservation.jwt.expiration-time",
+      "type": "java.lang.String",
+      "description": "Description for airline.reservation.jwt.expiration-time."
+    },
+    {
+      "name": "airline.reservation.jwt.token-prefix",
+      "type": "java.lang.String",
+      "description": "Description for airline.reservation.jwt.token-prefix."
+    },
+    {
+      "name": "airline.reservation.jwt.issuer",
+      "type": "java.lang.String",
+      "description": "Description for airline.reservation.jwt.issuer."
+    },
+    {
+      "name": "airline.reservation.jwt.header-string",
+      "type": "java.lang.String",
+      "description": "Description for airline.reservation.jwt.header-string."
+    }
+  ] }
