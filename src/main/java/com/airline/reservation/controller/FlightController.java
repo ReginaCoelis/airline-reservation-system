@@ -28,7 +28,7 @@ public class FlightController {
         return "redirect:/flights/list";
     }
 
-    @GetMapping(value = "/flight/{flightNumber}")
+    @GetMapping(value = "/flights/{flightNumber}")
     public FlightResponse getFlightByNumber(@PathVariable int flightNumber){
         return flightService.getFlightByNumber(flightNumber);
     }
@@ -38,8 +38,8 @@ public class FlightController {
         return flightService.getAllFlights();
     }
 
-    @RequestMapping(value = "/flight/{passengerId}", method = RequestMethod.GET)
-    public Flight getFlightByPassenger(@PathVariable int passengerId) {
+    @RequestMapping(value = "/flights/passengers/{passengerId}", method = RequestMethod.GET)
+    public Flight getFlightByPassengerId(@PathVariable int passengerId) {
         return flightService.getFlightByPassengerId(passengerId);
     }
 

@@ -29,6 +29,8 @@ public class Flight {
 
     private LocalDate departureDate;
 
+    private Integer seatsAvailable;
+
     @ManyToOne
     @JoinColumn(name = "arrivalAirport_id")
     private Airport arrivalAirport;
@@ -42,14 +44,100 @@ public class Flight {
 
     private LocalDate arrivalDate;
 
-    private Integer seatsAvailable;
-
     @ManyToOne
     @JoinColumn(name = "airlineid")
     private Airline airline;
 
     // default constructor
     public Flight() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getFlightNumber() {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(Integer flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public Airport getDepartureAirport() {
+        return departureAirport;
+    }
+
+    public void setDepartureAirport(Airport departureAirport) {
+        this.departureAirport = departureAirport;
+    }
+
+    public LocalTime getDepartureTime() {
+        return departureTime;
+    }
+
+    public LocalDate getDepartureDate() { return departureDate; }
+
+    public void setDepartureDate(LocalDate departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public void setDepartureTime(LocalTime departureTime) { this.departureTime = departureTime; }
+
+    public void setSeatsAvailable(Integer seatsAvailable) { this.seatsAvailable = seatsAvailable; }
+
+    public Integer getSeatsAvailable() { return seatsAvailable; }
+
+    public Airport getArrivalAirport() {
+        return arrivalAirport;
+    }
+
+    public void setArrivalAirport(Airport arrivalAirport) {
+        this.arrivalAirport = arrivalAirport;
+    }
+
+    public LocalTime getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(LocalTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public LocalDate getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public void setArrivalDate(LocalDate arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    public Airline getAirline() {
+        return airline;
+    }
+
+    public void setAirline(Airline airline) {
+        this.airline = airline;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
 }
