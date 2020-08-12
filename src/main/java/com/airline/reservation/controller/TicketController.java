@@ -1,4 +1,4 @@
-package com.airline.reservation.controller;
+package com.example.demo.controller;
 
 import com.airline.reservation.dto.response.TicketResponse;
 import com.airline.reservation.service.TicketService;
