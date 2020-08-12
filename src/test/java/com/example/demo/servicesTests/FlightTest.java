@@ -1,8 +1,8 @@
 package com.example.demo.servicesTests;
 
-import com.example.demo.dto.request.FlightRequest;
-import com.example.demo.dto.response.FlightResponse;
-import com.example.demo.service.FlightService;
+import com.airline.reservation.dto.request.FlightRequest;
+import com.airline.reservation.dto.response.FlightResponse;
+import com.airline.reservation.service.FlightService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

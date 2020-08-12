@@ -1,7 +1,9 @@
 package com.airline.reservation.domain;
 
 import javax.persistence.*;
+import javax.print.attribute.standard.MediaSize;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Flight {
@@ -41,6 +43,10 @@ public class Flight {
     @ManyToOne
     @JoinColumn(name = "airlineid")
     private Airline airline;
+
+    @OneToMany
+    @JoinColumn(name = "flight_id")
+    private List<Ticket> tickets;
 
     // default constructor
     public Flight() {
@@ -124,5 +130,13 @@ public class Flight {
 
     public void setAirline(Airline airline) {
         this.airline = airline;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

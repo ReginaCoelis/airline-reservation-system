@@ -42,7 +42,7 @@ public class swagger extends WebMvcConfigurationSupport {
     }
 
     private ApiInfo apiEndPointsInfo() {
-        return new ApiInfoBuilder().title("Spring Boot REST API").description("Rental Management REST API Documentation")
+        return new ApiInfoBuilder().title("Spring Boot REST API").description("Airline Reservation REST API Documentation")
                 .contact(new Contact("Code Busters", "https://github.com/samirazein20/", "samirazein20@gmail.com"))
                 .license("Apache 2.0").licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html").version("1.0.0")
                 .build();
