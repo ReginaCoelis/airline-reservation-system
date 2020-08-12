@@ -6,19 +6,11 @@ import com.airline.reservation.repository.TicketRepository;
 import com.airline.reservation.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-<<<<<<< HEAD
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-=======
-import javax.transaction.Transactional;
 import java.util.ArrayList;
->>>>>>> master
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+
 
 @Service
 @Transactional
@@ -32,10 +24,6 @@ public class TicketServiceImplementation implements TicketService {
         return convertTicketsToTicketResponses(ticketRepository.getTicketsByFlightNumber(flightNumber));
     }
 
-<<<<<<< HEAD
-
-}
-=======
     @Override
     public List<TicketResponse> getTicketByPassengerId(Long id) {
         return convertTicketsToTicketResponses(ticketRepository.getTicketsByPassengerId(id));
@@ -51,5 +39,6 @@ public class TicketServiceImplementation implements TicketService {
         }
         return ticketResponses;
     }
+
 }
->>>>>>> master
+

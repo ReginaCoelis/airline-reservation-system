@@ -1,7 +1,12 @@
 package com.airline.reservation.dto.response;
 
+import lombok.Data;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
+@Data
 public class TicketResponse {
 
     private Long id;
@@ -9,10 +14,10 @@ public class TicketResponse {
     private String airlineName;
     private String depratureAirport;
     private String arrivalAirport;
-    private Date departureTime;
-    private Date departureDate;
-    private Date arrivalTime;
-    private Date arrivalDate;
+    private LocalTime departureTime;
+    private LocalDate departureDate;
+    private LocalTime arrivalTime;
+    private LocalDate arrivalDate;
 
     private Date issuedAt;
 
@@ -23,8 +28,8 @@ public class TicketResponse {
     }
 
     public TicketResponse(Integer flightNumber, String airlineName, String depratureAirport, String arrivalAirport,
-                          Date departureTime, Date departureDate,
-                          Date arrivalTime, Date arrivalDate) {
+                          LocalTime departureTime, LocalDate departureDate,
+                          LocalTime arrivalTime, LocalDate arrivalDate) {
         //, ReservationResponse reservation
         super();
         this.flightNumber = flightNumber;
@@ -38,95 +43,5 @@ public class TicketResponse {
         this.arrivalDate = arrivalDate;
         this.reservation =reservation;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getFlightNumber() {
-        return flightNumber;
-    }
-
-    public void setFlightNumber(Integer flightNumber) {
-        this.flightNumber = flightNumber;
-    }
-
-    public String getAirlineName() {
-        return airlineName;
-    }
-
-    public void setAirlineName(String airlineName) {
-        this.airlineName = airlineName;
-    }
-
-    public String getDepratureAirport() {
-        return depratureAirport;
-    }
-
-    public void setDepratureAirport(String depratureAirport) {
-        this.depratureAirport = depratureAirport;
-    }
-
-    public String getArrivalAirport() {
-        return arrivalAirport;
-    }
-
-    public void setArrivalAirport(String arrivalAirport) {
-        this.arrivalAirport = arrivalAirport;
-    }
-
-
-    public Date getDepartureTime() {
-        return departureTime;
-    }
-
-    public void setDepartureTime(Date departureTime) {
-        this.departureTime = departureTime;
-    }
-
-    public Date getDepartureDate() {
-        return departureDate;
-    }
-
-    public void setDepartureDate(Date departureDate) {
-        this.departureDate = departureDate;
-    }
-
-    public Date getArrivalTime() {
-        return arrivalTime;
-    }
-
-    public void setArrivalTime(Date arrivalTime) {
-        this.arrivalTime = arrivalTime;
-    }
-
-    public Date getArrivalDate() {
-        return arrivalDate;
-    }
-
-    public void setArrivalDate(Date arrivalDate) {
-        this.arrivalDate = arrivalDate;
-    }
-
-    public Date getIssuedAt() {
-        return issuedAt;
-    }
-
-    public void setIssuedAt(Date issuedAt) {
-        this.issuedAt = issuedAt;
-    }
-
-    public ReservationResponse getReservation() {
-        return reservation;
-    }
-
-    public void setReservation(ReservationResponse reservation) {
-        this.reservation = reservation;
-    }
-
 
 }
