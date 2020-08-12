@@ -88,24 +88,35 @@ public class Flight {
         return departureTime;
     }
 
-    public LocalDate getDepartureDate() { return departureDate; }
+    public void setDepartureTime(LocalTime departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public LocalDate getDepartureDate() {
+        return departureDate;
+    }
 
     public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
     }
 
-    public void setDepartureTime(LocalTime departureTime) { this.departureTime = departureTime; }
-
     public void setSeatsAvailable(Integer seatsAvailable) { this.seatsAvailable = seatsAvailable; }
 
     public Integer getSeatsAvailable() { return seatsAvailable; }
-
     public Airport getArrivalAirport() {
         return arrivalAirport;
     }
 
     public void setArrivalAirport(Airport arrivalAirport) {
         this.arrivalAirport = arrivalAirport;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     public LocalTime getArrivalTime() {
@@ -130,14 +141,6 @@ public class Flight {
 
     public void setAirline(Airline airline) {
         this.airline = airline;
-    }
-
-    public List<Ticket> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
     }
 
 }
