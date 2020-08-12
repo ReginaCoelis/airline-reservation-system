@@ -1,10 +1,18 @@
 package com.airline.reservation.domain;
 
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+<<<<<<< HEAD
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+=======
+>>>>>>> master
 import java.util.Date;
 
+@Data
 @Entity
 @NamedQuery(
         name="Ticket.getTicketsByPassengerId",
@@ -19,12 +27,15 @@ public class Ticket {
     private String airlineName;
     private String depratureAirport;
     private String arrivalAirport;
-    private Date departureTime;
-    private Date departureDate;
-    private Date arrivalTime;
-    private Date arrivalDate;
+    private LocalTime departureTime;
+    private LocalDate departureDate;
+    private LocalTime arrivalTime;
+    private LocalDate arrivalDate;
     @CreationTimestamp
-    private Date issuedAt;
+    private LocalDateTime issuedAt;
+    @OneToOne
+    @JoinColumn(name = "passenger_id",nullable = true)
+    private Passenger passenger;
 
     @ManyToOne
     private Reservation reservation;
@@ -38,8 +49,8 @@ public class Ticket {
     }
 
     public Ticket(Integer flightNumber, String airlineName, String depratureAirport, String arrivalAirport,
-                  Date departureTime, Date departureDate,
-                  Date arrivalTime, Date arrivalDate, Reservation reservation) {
+                  LocalTime departureTime, LocalDate departureDate,
+                  LocalTime arrivalTime, LocalDate arrivalDate, Reservation reservation) {
         super();
         this.flightNumber = flightNumber;
         this.airlineName = airlineName;
@@ -53,6 +64,8 @@ public class Ticket {
         this.reservation =reservation;
     }
 
+<<<<<<< HEAD
+=======
     public Long getId() {
         return id;
     }
@@ -145,6 +158,7 @@ public class Ticket {
     public Passenger getPassenger() {
         return passenger;
     }
+>>>>>>> master
 
     public void setPassenger(Passenger passenger) {
         this.passenger = passenger;

@@ -6,21 +6,24 @@ import com.airline.reservation.dto.request.FlightRequest;
 import com.airline.reservation.dto.response.FlightResponse;
 import com.airline.reservation.exception.EmailFailureException;
 import com.airline.reservation.exception.FlightNotFoundException;
-import com.airline.reservation.repository.AirlineRepository;
-import com.airline.reservation.repository.AirportRepository;
-import com.airline.reservation.repository.FlightRepository;
-import com.airline.reservation.repository.ReservationRepository;
+import com.airline.reservation.repository.*;
 import com.airline.reservation.service.FlightService;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 
@@ -43,7 +46,11 @@ public class FlightServiceImpl implements FlightService {
     @Autowired
     private AirportRepository airportRepository;
 
+    @Autowired
+    private PassengerRepository passengerRepository;
 
+   @Autowired
+   private RabbitTemplate rabbitTemplate;
 
     @Override
     public FlightResponse addFlight(FlightRequest flightRequest) {
@@ -156,6 +163,29 @@ public class FlightServiceImpl implements FlightService {
             System.out.println("Flight is full");
         }
 
+    }
+
+    @Override
+    public void notifyUpcomingFlights() throws ExecutionException, InterruptedException {
+        CompletableFuture
+                .runAsync(()-> {
+            List<Flight> flightList = flightRepository
+                    .findByDepartureDate(LocalDate.now());
+            Predicate<Ticket> departureDateIsEqual = (ticket) -> {
+                return LocalDate.now().isEqual(ticket.getDepartureDate());
+            };
+            Predicate<Ticket> departureTimeHasTwoHrLeft = (ticket) -> {
+                return ticket.getDepartureTime().getHour() - LocalTime.now().getHour() == 2;
+            };
+            List<String> passengerEmails = flightList.stream()
+            .flatMap(flight -> flight.getTickets().stream()).filter(ticket -> departureDateIsEqual.test(ticket) &&
+                            departureTimeHasTwoHrLeft.test(ticket))
+            .map(ticket -> passengerRepository.findById(ticket.getReservation().getPassengerId()).get().getEmail())
+            .collect(Collectors.toList());
+            //send
+
+            rabbitTemplate.convertAndSend("airline.emails",passengerEmails);
+        });
     }
 
 }

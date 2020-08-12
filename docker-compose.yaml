@@ -16,3 +16,9 @@ services:
       MYSQL_USER: flight
       MYSQL_PASSWORD: flight
       MYSQL_ROOT_PASSWORD: flight
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbit_server
+    ports:
+      - "5672:5672"
+      - "15672:15672"

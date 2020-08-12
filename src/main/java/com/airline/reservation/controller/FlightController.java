@@ -4,8 +4,7 @@ import com.airline.reservation.domain.Flight;
 import com.airline.reservation.domain.Passenger;
 import com.airline.reservation.dto.request.FlightRequest;
 import com.airline.reservation.dto.response.FlightResponse;
-import com.airline.reservation.service.impl.FlightServiceImpl;
-
+import com.airline.reservation.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +14,8 @@ import java.util.List;
 @RequestMapping("/api")
 public class FlightController {
 
-    private FlightServiceImpl flightService;
-
     @Autowired
-    public FlightController(FlightServiceImpl flightService) {
-        this.flightService = flightService;
-    }
-
+    private FlightService flightService;
 
     @GetMapping("/")
     public String hello() {

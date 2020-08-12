@@ -1,10 +1,19 @@
 package com.airline.reservation.domain;
 
+import lombok.Data;
+
 import javax.persistence.*;
+<<<<<<< HEAD
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+=======
 import javax.print.attribute.standard.MediaSize;
+>>>>>>> master
 import java.util.Date;
 import java.util.List;
 
+@Data
 @Entity
 public class Flight {
 
@@ -22,21 +31,22 @@ public class Flight {
     @JoinColumn(name = "departureAirport_id")
     private Airport departureAirport;
 
-    @Temporal(TemporalType.TIME)
-    private Date departureTime;
+    private LocalTime departureTime;
 
-    @Temporal(TemporalType.DATE)
-    private Date departureDate;
+    private LocalDate departureDate;
 
     @ManyToOne
     @JoinColumn(name = "arrivalAirport_id")
     private Airport arrivalAirport;
 
-    @Temporal(TemporalType.TIME)
-    private Date arrivalTime;
 
-    @Temporal(TemporalType.DATE)
-    private Date arrivalDate;
+    @OneToMany
+    @JoinColumn(name = "flight_id")
+    private List<Ticket> tickets;
+
+    private LocalTime arrivalTime;
+
+    private LocalDate arrivalDate;
 
     private Integer seatsAvailable;
 
@@ -52,6 +62,8 @@ public class Flight {
     public Flight() {
     }
 
+<<<<<<< HEAD
+=======
     public Long getId() {
         return id;
     }
@@ -139,4 +151,5 @@ public class Flight {
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
     }
+>>>>>>> master
 }
