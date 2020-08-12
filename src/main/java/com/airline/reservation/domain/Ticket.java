@@ -55,4 +55,100 @@ public class Ticket {
         this.arrivalDate = arrivalDate;
         this.reservation =reservation;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getFlightNumber() {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(Integer flightNumber) {
+        this.flightNumber = flightNumber;
+    }
+
+    public String getAirlineName() {
+        return airlineName;
+    }
+
+    public void setAirlineName(String airlineName) {
+        this.airlineName = airlineName;
+    }
+
+    public String getDepratureAirport() {
+        return depratureAirport;
+    }
+
+    public void setDepratureAirport(String depratureAirport) {
+        this.depratureAirport = depratureAirport;
+    }
+
+    public String getArrivalAirport() {
+        return arrivalAirport;
+    }
+
+    public void setArrivalAirport(String arrivalAirport) {
+        this.arrivalAirport = arrivalAirport;
+    }
+
+    public LocalTime getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(LocalTime departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public LocalDate getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(LocalDate departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public LocalTime getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(LocalTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public LocalDate getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public void setArrivalDate(LocalDate arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    public LocalDateTime getIssuedAt() {
+        return issuedAt;
+    }
+
+    public void setIssuedAt(LocalDateTime issuedAt) {
+        this.issuedAt = issuedAt;
+    }
+
+    public Passenger getPassenger() {
+        return passenger;
+    }
+
+    public void setPassenger(Passenger passenger) {
+        this.passenger = passenger;
+    }
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
 }

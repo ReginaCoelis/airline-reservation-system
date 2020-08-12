@@ -16,7 +16,10 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -47,6 +50,10 @@ public class FlightServiceImpl implements FlightService {
 
     @Autowired
     private PassengerRepository passengerRepository;
+
+    @Autowired
+    private TicketRepository ticketRepository;
+
 
 
     @Override
@@ -82,28 +89,24 @@ public class FlightServiceImpl implements FlightService {
 
     private FlightResponse covertFlightToFlightResponse(Flight flight){
         return new FlightResponse(flight.getId(), flight.getFlightNumber(), flight.getCapacity(), flight.getDepartureAirport().getCode(), flight.getDepartureTime(),flight.getDepartureDate(),flight.getArrivalAirport().getCode(),flight.getArrivalTime(),flight.getArrivalDate(), flight.getAirline().getCode());
-
     }
 
 
     @Override
     public Flight getFlightByPassengerId(Integer passengerId) {
-        Flight flight = null;
-        Set<Integer> flightNumbers = reservationRepository.findFlightNumbers(passengerId);
-        System.out.println("First: " + flightNumbers);
+        Ticket passengerTicket = ticketRepository.findTicketByPassengerId((long)passengerId);
+        System.out.println("========================= Ticket: " + passengerTicket.getId());
+        Flight flight = flightRepository.getFlightById(passengerTicket.getId());
 
-        for(int flightNumber : flightNumbers) {
-            flight = flightRepository.getByFlightNumber(flightNumber);
-        }
-        System.out.println("Second: " + flight);
         return flight;
     }
 
     public void sendEmail() throws EmailFailureException {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo("dummy@gmail.com");
+        message.setTo("elgordofifa@gmail.com");
         message.setSubject("Dummy Subject");
         message.setText("Just Dummy Text");
+        System.out.println("========================= Message To Send: " + message.getSubject());
 
         javaMailSender.send(message);
     }
@@ -111,14 +114,14 @@ public class FlightServiceImpl implements FlightService {
     public boolean checkSeatAvailability(int flightId) {
         boolean fullStatus = false;
         Optional<Flight> flight = flightRepository.findById((long) flightId);
+        System.out.println("========================= Obtained Flight: " + flight.get().getSeatsAvailable());
 
-        if(!flight.isPresent()) {
+        if(flight.isPresent()) {
             Flight currentFlight = flight.get();
             if(currentFlight.getSeatsAvailable() > 0) {
                 fullStatus = true;
             }
         }
-
         return fullStatus;
     }
 
@@ -138,10 +141,13 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public void bookFlight(int flightId, Passenger passenger) {
+        System.out.println("========================= Book Flight: " + flightId);
         Optional<Flight> flight = flightRepository.findById((long) flightId);
+        System.out.println("========================= Obtained Flight 1: ");
 
-        if(!flight.isPresent())
+        if(!flight.isPresent()) {
             throw new FlightNotFoundException("Flight not found");
+        }
 
         if(checkSeatAvailability(flightId) == true) {
             Flight currentFlight = flight.get();
@@ -154,6 +160,14 @@ public class FlightServiceImpl implements FlightService {
             Integer currentSeats = currentFlight.getSeatsAvailable();
             currentFlight.setSeatsAvailable(currentSeats - 1);
             flightRepository.save(currentFlight);
+
+            Ticket currentTicket = new Ticket(
+                    currentFlight.getFlightNumber(), currentFlight.getAirline().getName(), currentFlight.getDepartureAirport().getName(), currentFlight.getArrivalAirport().getName(),
+                    currentFlight.getDepartureTime(), currentFlight.getDepartureDate(),
+                    currentFlight.getArrivalTime(), currentFlight.getArrivalDate(), booking
+            );
+
+            ticketRepository.save(currentTicket);
 
             handleEmail(booking, passenger);
         } else {
