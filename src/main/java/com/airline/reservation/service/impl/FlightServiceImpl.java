@@ -11,8 +11,10 @@ import com.airline.reservation.service.FlightService;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -20,6 +22,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -32,10 +35,13 @@ import java.util.stream.Collectors;
 public class FlightServiceImpl implements FlightService {
 
     @Autowired
-    private JavaMailSender javaMailSender;
+    private EmailService emailService;
 
     @Autowired
     private FlightRepository flightRepository;
+
+    @Autowired
+    private TicketRepository ticketRepository;
 
     @Autowired
     private ReservationRepository reservationRepository;
@@ -51,6 +57,8 @@ public class FlightServiceImpl implements FlightService {
 
    @Autowired
    private RabbitTemplate rabbitTemplate;
+
+
 
     @Override
     public FlightResponse addFlight(FlightRequest flightRequest) {
@@ -91,24 +99,23 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public Flight getFlightByPassengerId(Integer passengerId) {
-        Flight flight = null;
-        Set<Integer> flightNumbers = reservationRepository.findFlightNumbers(passengerId);
-        System.out.println("First: " + flightNumbers);
+        Ticket passengerTicket = ticketRepository.getTicketByPassenger_Id((long)passengerId);
+        System.out.println("========================= Find Stuff " + (long)passengerId);
+        System.out.println("========================= Ticket: " + passengerTicket.getId());
+//        Flight flight = flightRepository.getFlightById(passengerTicket.getId());
+        Flight flight = flightRepository.getFlightById(1);
 
-        for(int flightNumber : flightNumbers) {
-            flight = flightRepository.getByFlightNumber(flightNumber);
-        }
         System.out.println("Second: " + flight);
         return flight;
     }
 
-    public void sendEmail() throws EmailFailureException {
+    public void sendEmail(String emailTo, String subject, String body) throws EmailFailureException {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo("dummy@gmail.com");
-        message.setSubject("Dummy Subject");
-        message.setText("Just Dummy Text");
+        message.setTo(emailTo);
+        message.setSubject(subject);
+        message.setText(body);
 
-        javaMailSender.send(message);
+        emailService.getJavaMailSender().send(message);
     }
 
     public boolean checkSeatAvailability(int flightId) {
@@ -125,15 +132,30 @@ public class FlightServiceImpl implements FlightService {
         return fullStatus;
     }
 
-    public void handleEmail(Reservation reservation, Passenger passenger) {
+    public void handleEmail(Reservation reservation, Passenger passenger, Ticket ticket) {
         System.out.println("=========================");
         System.out.println("=======Send Email========");
         System.out.println("=========================");
         System.out.println("Passenger: " + passenger.getEmail());
         System.out.println("Reservation: " + reservation.getId());
+        String message = "Hello " + passenger.getName() + "," + "\n\n" +
+                "Your Reservation has been Successfully made." + "\n\n" + "Below are your Details" + "\n\n" +
+                "Passenger Name: " + passenger.getName() + "\n\n" +
+
+                "Reservation Code: " + reservation.getReservationCode() + "\n" +
+                "Reservation Status: " + reservation.isConfirmed() + "\n" +
+                "Reservation FlightNumbers: " + reservation.getFlightNumbers() + "\n\n" +
+
+                "Airline Name: " + ticket.getAirlineName() + "\n" +
+                "Flight Number: " + ticket.getFlightNumber() + "\n" +
+                "Arrival Airport: " + ticket.getArrivalAirport() + "\n" +
+                "Departure Airport: " + ticket.getDepratureAirport() + "\n" +
+                "Departure Date: " + ticket.getDepartureDate() + "\n\n\n\n" +
+                "Airline Reservation System"
+                ;
 
         try{
-            sendEmail();
+            sendEmail(passenger.getEmail(), "Reservation Successfully Made", message);
         }catch (EmailFailureException ex) {
             throw ex;
         }
@@ -151,14 +173,25 @@ public class FlightServiceImpl implements FlightService {
             Reservation booking = new Reservation();
 
             booking.setConfirmed(true);
+            booking.setReservationCode(currentFlight.getAirline() + "" + new Random().nextInt(1000));
             booking.setPassengerId(passenger.getId());
             reservationRepository.save(booking);
 
             Integer currentSeats = currentFlight.getSeatsAvailable();
             currentFlight.setSeatsAvailable(currentSeats - 1);
+            System.out.println("Seats Before Saving %%%%%%%%: " + currentFlight.getSeatsAvailable());
             flightRepository.save(currentFlight);
 
-            handleEmail(booking, passenger);
+            Ticket currentTicket = new Ticket(
+                    currentFlight.getFlightNumber(), currentFlight.getAirline().getName(), currentFlight.getDepartureAirport().getName(), currentFlight.getArrivalAirport().getName(),
+                    currentFlight.getDepartureTime(), currentFlight.getDepartureDate(),
+                    currentFlight.getArrivalTime(), currentFlight.getArrivalDate(), booking
+            );
+
+            ticketRepository.save(currentTicket);
+
+            handleEmail(booking, passenger, currentTicket);
+
         } else {
             System.out.println("Flight is full");
         }
