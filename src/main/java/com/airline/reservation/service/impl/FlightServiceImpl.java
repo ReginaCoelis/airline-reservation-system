@@ -57,14 +57,6 @@ public class FlightServiceImpl implements FlightService {
     @Autowired
     private PassengerRepository passengerRepository;
 
-    @Autowired
-    private TicketRepository ticketRepository;
-
-
-
-
-
-
 
     @Override
     public FlightResponse addFlight(FlightRequest flightRequest) {
