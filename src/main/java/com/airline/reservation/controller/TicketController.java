@@ -1,18 +1,19 @@
-package com.example.demo.controller;
+package com.airline.reservation.controller;
 
 import com.airline.reservation.dto.response.TicketResponse;
 import com.airline.reservation.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/api")
 public class TicketController {
 
     @Autowired
-    TicketService ticketService;
+    private TicketService ticketService;
 
     @GetMapping("/getAllTicketsByFlightNumber")
     public List<TicketResponse> getAllTicketsByFlightNumber(Integer flightNumber){
@@ -20,7 +21,12 @@ public class TicketController {
     }
 
     @GetMapping("/getAllTicketsByPassengerId")
-    public List<TicketResponse> getAllTicketsByPassengerId(Long passengerId){
+    public TicketResponse getAllTicketsByPassengerId(Long passengerId){
+        return ticketService.getTicketByPassengerId(passengerId);
+    }
+
+    @GetMapping("/tickets/{passengerId}")
+    public @ResponseBody TicketResponse getPassengerTicket(@PathVariable("passengerId") Long passengerId){
         return ticketService.getTicketByPassengerId(passengerId);
     }
 }

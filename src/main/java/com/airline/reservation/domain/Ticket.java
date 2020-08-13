@@ -42,7 +42,7 @@ public class Ticket {
 
     public Ticket(Integer flightNumber, String airlineName, String depratureAirport, String arrivalAirport,
                   LocalTime departureTime, LocalDate departureDate,
-                  LocalTime arrivalTime, LocalDate arrivalDate, Reservation reservation) {
+                  LocalTime arrivalTime, LocalDate arrivalDate, Reservation reservation,Passenger passenger) {
         super();
         this.flightNumber = flightNumber;
         this.airlineName = airlineName;
@@ -54,6 +54,7 @@ public class Ticket {
         this.arrivalTime = arrivalTime;
         this.arrivalDate = arrivalDate;
         this.reservation =reservation;
+        this.passenger = passenger;
     }
 
     public Long getId() {

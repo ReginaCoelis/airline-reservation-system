@@ -9,10 +9,6 @@ import java.util.List;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
-    public List<Ticket> getTicketsByFlightNumber(Integer flightNumber);
-    public List<Ticket> getTicketsByPassengerId(Long id);
-    public Ticket getTicketByPassenger_Id(Long passengerId);
-    public Ticket findTicketByPassengerId(Long passengerId);
-
-
+    public List<Ticket> findByFlightNumber(Integer flightNumber);
+    Ticket findByPassengerId(Long id);
 }

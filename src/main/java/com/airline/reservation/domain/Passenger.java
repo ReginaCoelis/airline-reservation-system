@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,8 +19,8 @@ public class Passenger implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @OneToMany
-    private List<Role> roles;
+    @OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER)
+    private List<Role> roles = new ArrayList<>();
     private String email;
     private String password;
     @Override

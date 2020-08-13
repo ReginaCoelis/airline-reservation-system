@@ -21,12 +21,15 @@ public class TicketServiceImplementation implements TicketService {
 
     @Override
     public List<TicketResponse> getTicketsByFlightNumber(Integer flightNumber) {
-        return convertTicketsToTicketResponses(ticketRepository.getTicketsByFlightNumber(flightNumber));
+        return convertTicketsToTicketResponses(ticketRepository.findByFlightNumber(flightNumber));
     }
 
     @Override
-    public List<TicketResponse> getTicketByPassengerId(Long id) {
-        return convertTicketsToTicketResponses(ticketRepository.getTicketsByPassengerId(id));
+    public TicketResponse getTicketByPassengerId(Long id) {
+        Ticket ticket = ticketRepository.findByPassengerId(id);
+        return new TicketResponse(ticket.getFlightNumber(), ticket.getAirlineName(), ticket.getDepratureAirport(),
+                ticket.getArrivalAirport(), ticket.getDepartureTime(),
+                ticket.getDepartureDate(), ticket.getArrivalTime(), ticket.getArrivalDate());
     }
 
     public List<TicketResponse> convertTicketsToTicketResponses(List<Ticket> ticket) {

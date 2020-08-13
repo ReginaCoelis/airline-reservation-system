@@ -2,6 +2,7 @@ package com.airline.reservation.service.impl;
 
 
 import com.airline.reservation.domain.*;
+import com.airline.reservation.dto.request.BookingRequest;
 import com.airline.reservation.dto.request.FlightRequest;
 import com.airline.reservation.dto.response.FlightResponse;
 import com.airline.reservation.exception.EmailFailureException;
@@ -59,7 +60,7 @@ public class FlightServiceImpl implements FlightService {
 
 
     @Override
-    public FlightResponse addFlight(FlightRequest flightRequest) {
+    public void addFlight(FlightRequest flightRequest) {
         Airline airline= airlineRepository.findByCode(flightRequest.getAirlineCode());
         Airport departureAirport= airportRepository.findByCode(flightRequest.getDepartureAirport());
         Airport originAirport= airportRepository.findByCode(flightRequest.getArrivalAirport());
@@ -75,12 +76,12 @@ public class FlightServiceImpl implements FlightService {
         flight.setArrivalDate(flightRequest.getArrivalDate());
         flight.setAirline(airline);
 
-        return covertFlightToFlightResponse(flightRepository.save(flight));
+        flightRepository.save(flight);
     }
 
     @Override
     public FlightResponse getFlightByNumber(Integer flightNumber) {
-        return covertFlightToFlightResponse(flightRepository.getByFlightNumber(flightNumber));
+        return covertFlightToFlightResponse(flightRepository.findByFlightNumber(flightNumber));
     }
 
     @Override
@@ -96,15 +97,8 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public Flight getFlightByPassengerId(Integer passengerId) {
-        Ticket passengerTicket = ticketRepository.getTicketByPassenger_Id((long)passengerId);
-        System.out.println("========================= Find Stuff " + (long)passengerId);
-        System.out.println("========================= Ticket: " + passengerTicket.getId());
-//        Flight flight = flightRepository.getFlightById(passengerTicket.getId());
-        Flight flight = flightRepository.getFlightById(1);
-
-        System.out.println("Second: " + flight);
-
-        return flight;
+        Optional<Ticket> passengerTicketOptional = Optional.ofNullable(ticketRepository.findByPassengerId((long)passengerId));
+        return flightRepository.findByFlightNumber(passengerTicketOptional.orElseThrow().getFlightNumber());
     }
 
     public void sendEmail(String emailTo, String subject, String body) throws EmailFailureException {
@@ -115,9 +109,9 @@ public class FlightServiceImpl implements FlightService {
         emailService.getJavaMailSender().send(message);
     }
 
-    public boolean checkSeatAvailability(int flightId) {
+    public boolean checkSeatAvailability(long flightId) {
         boolean fullStatus = false;
-        Optional<Flight> flight = flightRepository.findById((long) flightId);
+        Optional<Flight> flight = flightRepository.findById(flightId);
         System.out.println("========================= Obtained Flight: " + flight.get().getSeatsAvailable());
 
         if(flight.isPresent()) {
@@ -159,38 +153,37 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void bookFlight(int flightId, Passenger passenger) {
-        System.out.println("========================= Book Flight: " + flightId);
-        Optional<Flight> flight = flightRepository.findById((long) flightId);
+    public void bookFlight(BookingRequest bookingRequest) {
+        Optional<Flight> flight = flightRepository.findById((long) bookingRequest.getFlightId());
         System.out.println("========================= Obtained Flight 1: ");
 
         if(!flight.isPresent()) {
             throw new FlightNotFoundException("Flight not found");
         }
 
-        if(checkSeatAvailability(flightId) == true) {
+        if(checkSeatAvailability(bookingRequest.getFlightId()) == true) {
             Flight currentFlight = flight.get();
             Reservation booking = new Reservation();
 
             booking.setConfirmed(true);
             booking.setReservationCode(currentFlight.getAirline() + "" + new Random().nextInt(1000));
-            booking.setPassengerId(passenger.getId());
+            booking.setPassengerId(bookingRequest.getPassengerId());
             reservationRepository.save(booking);
 
             Integer currentSeats = currentFlight.getSeatsAvailable();
             currentFlight.setSeatsAvailable(currentSeats - 1);
             System.out.println("Seats Before Saving %%%%%%%%: " + currentFlight.getSeatsAvailable());
             flightRepository.save(currentFlight);
-
+            Passenger passenger = passengerRepository.findById(bookingRequest.getPassengerId()).orElseThrow();
             Ticket currentTicket = new Ticket(
                     currentFlight.getFlightNumber(), currentFlight.getAirline().getName(), currentFlight.getDepartureAirport().getName(), currentFlight.getArrivalAirport().getName(),
                     currentFlight.getDepartureTime(), currentFlight.getDepartureDate(),
-                    currentFlight.getArrivalTime(), currentFlight.getArrivalDate(), booking
+                    currentFlight.getArrivalTime(), currentFlight.getArrivalDate(), booking,passenger
             );
 
             ticketRepository.save(currentTicket);
 
-            handleEmail(booking, passenger, currentTicket);
+            CompletableFuture.runAsync(() -> handleEmail(booking, passenger, currentTicket));
         } else {
             System.out.println("Flight is full");
         }

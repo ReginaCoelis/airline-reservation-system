@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface TicketService {
     public List<TicketResponse> getTicketsByFlightNumber(Integer flightNumber);
-    public List<TicketResponse> getTicketByPassengerId(Long id);
+    public TicketResponse getTicketByPassengerId(Long id);
 }
