@@ -1,4 +1,4 @@
-package com.example.demo.servicesTests;
+package com.airline.reservation.service.impl;
 
 import com.airline.reservation.dto.request.FlightRequest;
 import com.airline.reservation.dto.response.FlightResponse;
@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@ComponentScan("com.example.demo.service")
+@ComponentScan("com.airline.reservation.service")
 public class FlightTest {
     FlightResponse flightResponse;
     FlightResponse flightResponse1;
