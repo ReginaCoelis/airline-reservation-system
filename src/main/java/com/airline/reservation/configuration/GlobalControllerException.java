@@ -22,4 +22,7 @@ public class GlobalControllerException {
          log.info("Error {}",throwable.getStackTrace());
         return new ResponseEntity("An Error Occured. Please try again later",HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+
+
 }

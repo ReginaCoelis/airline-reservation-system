@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -59,6 +60,7 @@ public class FlightServiceImpl implements FlightService {
     private PassengerRepository passengerRepository;
 
 
+    @Secured({"ROLE_ADMIN"})
     @Override
     public void addFlight(FlightRequest flightRequest) {
         Airline airline= airlineRepository.findByCode(flightRequest.getAirlineCode());
@@ -84,6 +86,7 @@ public class FlightServiceImpl implements FlightService {
         return covertFlightToFlightResponse(flightRepository.findByFlightNumber(flightNumber));
     }
 
+    @Secured({"ROLE_ADMIN"})
     @Override
     public List<FlightResponse> getAllFlights() {
         return flightRepository.findAll().stream().parallel().map(this::covertFlightToFlightResponse).collect(Collectors.toList());

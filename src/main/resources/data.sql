@@ -5,7 +5,7 @@ INSERT INTO role_tbl(id,name) VALUES (2,"ROLE_PASSENGER");
 
 INSERT INTO passenger(id, name, email) VALUES (01,"elgordo", "elgordofifa@gmail.com");
 INSERT INTO passenger(id, name, email) VALUES (02,"psgr2", "psgr2@test.com");
-
+INSERT INTO passenger(id, name, email,password) VALUES (10,"rachel", "rachel@gmail.com","$2a$10$GD195vBOVTchZLnLQuDLRuYujnOvJdzxoXIIKrpVfVO3kGg.KhpH6");
 
 INSERT INTO airport(id, city,state,street,zip,code,name) VALUES(002,"CedarRapids","Iowa","200N airportSt","123","456","Cedar Rapids airport");
 INSERT INTO airport(id, city,state,street,zip,code,name) VALUES(001,"Des Moines","Iowa","1000S 4thSt","5674","987","Des Moines airport");
@@ -24,6 +24,8 @@ INSERT INTO history(history, id) VALUES("Our history goes back to 1890" ,301);
 
 INSERT INTO reservation_flight_numbers(reservation_id, flight_number) VALUES(500, 61);
 INSERT INTO reservation_flight_numbers(reservation_id, flight_number) VALUES(501, 60);
+
+INSERT INTO passenger_roles(passenger_id, roles_id) VALUES (10,1);
 
 -- INSERT INTO ticket(id,airline_name,arrival_airport, arrival_date, arrival_time,departure_date, departure_time,departure_airport,flight_number,issued_at,reservation_id)
 --  VALUES(900,"United Airline","CedarRapids",'2020-08-31','14:00:00','2020-08-31','9:00:00',"Des Moines",50,'2020-08-25',500)

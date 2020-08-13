@@ -77,8 +77,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String headerString = environment.getJwt().getHeaderString();
         String tokenPrefix = environment.getJwt().getTokenPrefix();
 
+        log.info(token);
         // Return the Jwt response to the client
-        response.addHeader(headerString, tokenPrefix+ token);
+        response.addHeader("Authorization", "Bearer "+ token);
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

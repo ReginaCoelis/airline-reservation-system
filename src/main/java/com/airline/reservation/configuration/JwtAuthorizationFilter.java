@@ -76,7 +76,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                                 .stream()
                                 .map(SimpleGrantedAuthority::new)
                                 .collect(Collectors.toList());
-
+                logger.info(mapRolesToGrantedAuthorities.get(0));
                 return Optional.of(new UsernamePasswordAuthenticationToken(user,null,mapRolesToGrantedAuthorities));
             }
             return Optional.empty();
