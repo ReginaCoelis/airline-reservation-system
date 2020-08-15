@@ -93,7 +93,10 @@ public class FlightServiceImpl implements FlightService {
     }
 
     private FlightResponse covertFlightToFlightResponse(Flight flight){
-        return new FlightResponse(flight.getId(), flight.getFlightNumber(), flight.getCapacity(), flight.getDepartureAirport().getCode(), flight.getDepartureTime(),flight.getDepartureDate(),flight.getArrivalAirport().getCode(),flight.getArrivalTime(),flight.getArrivalDate(), flight.getAirline().getCode());
+        String departureAirportName = flight.getDepartureAirport() == null?null:flight.getDepartureAirport().getName();
+        String arrivalAirportName = flight.getArrivalAirport() == null?null:flight.getArrivalAirport().getName();
+        String airlineCode = flight.getAirline() == null?null:flight.getAirline().getName();
+        return new FlightResponse(flight.getId(), flight.getFlightNumber(), flight.getCapacity(), departureAirportName, flight.getDepartureTime(),flight.getDepartureDate(),arrivalAirportName,flight.getArrivalTime(),flight.getArrivalDate(), airlineCode);
     }
 
 

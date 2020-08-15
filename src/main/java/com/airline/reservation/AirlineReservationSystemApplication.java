@@ -33,13 +33,4 @@ public class AirlineReservationSystemApplication {
         return new BCryptPasswordEncoder();
     }
 
-//    @PostConstruct
-//    public void addAdmin(){
-//        Passenger admin = new Passenger();
-//        admin.setName("Rachel ");
-//        admin.setEmail("rachel.aitu@gmail.com");
-//        admin.setPassword("rachel@123");
-//        admin.setRoles(Collections.singletonList(new Role("ROLE_ADMIN")));
-//        accountService.createAdmin(admin);
-//    }
 }
