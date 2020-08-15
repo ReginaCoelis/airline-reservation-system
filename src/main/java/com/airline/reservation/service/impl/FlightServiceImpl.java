@@ -59,7 +59,6 @@ public class FlightServiceImpl implements FlightService {
     @Autowired
     private PassengerRepository passengerRepository;
 
-
     @Secured({"ROLE_ADMIN"})
     @Override
     public void addFlight(FlightRequest flightRequest) {

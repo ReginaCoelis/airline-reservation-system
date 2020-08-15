@@ -8,6 +8,12 @@ public class AirlineRequest {
 
     public AirlineRequest(){}
 
+    public AirlineRequest(String code, String name, String history) {
+        this.code = code;
+        this.name = name;
+        this.history = history;
+    }
+
     public String getCode() {
         return code;
     }

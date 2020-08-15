@@ -1,5 +1,7 @@
 package com.airline.reservation.dto.request;
 
+import com.airline.reservation.domain.Address;
+
 public class AirportRequest {
 
     private String code;
