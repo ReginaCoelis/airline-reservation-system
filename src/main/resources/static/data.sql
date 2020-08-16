@@ -19,8 +19,8 @@ INSERT INTO flight(id,arrival_date, arrival_time, capacity,departure_date, depar
 INSERT INTO reservation(id,created_at,is_cancelled,is_confirmed,last_update_date,made_by_agent_id,made_by_user_id,passenger_id,reservation_code)VALUES(500, '2020-08-15', false, true, '2020-08-16',900,1000,01,2000);
 INSERT INTO reservation(id,created_at,is_cancelled,is_confirmed,last_update_date,made_by_agent_id,made_by_user_id,passenger_id,reservation_code)VALUES(501, '2020-08-20', false, true, '2020-08-25',901,1001,02,2001);
 
-INSERT INTO history(history, id) VALUES("Airline was started in 1980" ,300);
-INSERT INTO history(history, id) VALUES("Our history goes back to 1890" ,301);
+INSERT INTO history(history, id) VALUES("Airline was started in 1980" ,50);
+INSERT INTO history(history, id) VALUES("Our history goes back to 1890" ,51);
 
 INSERT INTO reservation_flight_numbers(reservation_id, flight_number) VALUES(500, 61);
 INSERT INTO reservation_flight_numbers(reservation_id, flight_number) VALUES(501, 60);
